@@ -5,8 +5,31 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Practica4._1"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <TextBlock>hgv</TextBlock>
+        Title="MainWindow" Height="650" Width="1000">
+    <Grid Background="#FFFFF8F8">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50*"/>
+            <RowDefinition Height="600*"/>
+        </Grid.RowDefinitions>
+
+        <Frame Grid.Row="1" NavigationUIVisibility="Hidden" x:Name="MainFrame"></Frame>
+        <Border Grid.Row="0" Background="#FF4767AC" CornerRadius="15">
+            <Grid>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+
+                    <Image Source="/Image/Logo_Color_Transparent.png" Height="50" Margin="0 -8 0 0">
+                        <!--<Image.Effect>
+                            <DropShadowEffect Opacity="0.8" BlurRadius="10" Direction="314" ShadowDepth="7" Color="Black"></DropShadowEffect>
+                        </Image.Effect>-->
+                    </Image>
+
+                </StackPanel>
+
+                <Image Visibility="Collapsed" x:Name="Person" Style="{StaticResource InteractionImage}" Source="{StaticResource PersonDrawingImage}" HorizontalAlignment="Left" VerticalAlignment="Center" Width="40" Height="40" Margin="10 0 0 0"></Image>
+                <Image Visibility="Collapsed" x:Name="Exit" Style="{StaticResource InteractionImage}" Source="{StaticResource exit_svgrepo_comDrawingImage}"  HorizontalAlignment="Right" VerticalAlignment="Center" Width="25" Height="25" Margin="0 0 10 0" MouseDown="Exit_MouseDown" ></Image>
+            </Grid>
+        </Border>
+        <Image Style="{StaticResource InteractionImage}" Source="{StaticResource cross_svgrepo_comDrawingImage}" Width="15" Height="15" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="10" MouseDown="Image_MouseDown"></Image>
+
     </Grid>
 </Window>
