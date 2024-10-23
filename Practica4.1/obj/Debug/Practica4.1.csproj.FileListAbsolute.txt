@@ -32,3 +32,5 @@ C:\Users\User\source\repos\Practica4.1\Practica4.1\obj\Debug\Pages\AddEditEmploy
 C:\Users\User\source\repos\Practica4.1\Practica4.1\obj\Debug\Pages\ListEmploye.g.cs
 C:\Users\User\source\repos\Practica4.1\Practica4.1\obj\Debug\Pages\AddEditEmployeePage.baml
 C:\Users\User\source\repos\Practica4.1\Practica4.1\obj\Debug\Pages\ListEmploye.baml
+C:\Users\User\source\repos\Practica4.1\Practica4.1\obj\Debug\Pages\ComponAndMater.g.cs
+C:\Users\User\source\repos\Practica4.1\Practica4.1\obj\Debug\Pages\AddEditMaterial.g.cs

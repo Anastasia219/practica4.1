@@ -15,7 +15,7 @@ namespace Practica4._1
     /// </summary>
     public partial class App : Application
     {
-        public static UchebkaEntities db = new UchebkaEntities();
+        public static UchebkaEntities1 db = new UchebkaEntities1();
         public static MainWindow mainWindow;
         public static User currentUser;
         public static ListEmploye listEmploye;

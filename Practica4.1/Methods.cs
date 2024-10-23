@@ -21,7 +21,10 @@ namespace Practica4._1
             image.EndInit();
             return image;
         }
-       
+        public static void TakeWarning(string text)
+        {
+            MessageBox.Show(text, "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);
+        }
         public static void TakeInformation(string text)
         {
             MessageBox.Show(text, "Информация", MessageBoxButton.OK, MessageBoxImage.Information);

@@ -1,0 +1,42 @@
+﻿<Page x:Class="Practica4._1.Pages.AddOrders"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Practica4._1.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="650" d:DesignWidth="1000"
+      Title="AddOrders">
+
+    <Grid>
+        <StackPanel Margin="10">
+            <Label Content="Наименование заказа:"/>
+            <TextBox x:Name="OrderNameTextBox"/>
+
+            <Label Content="Заказчик:"/>
+            <ComboBox x:Name="CustomerComboBox"/>
+            <Button Content="Добавить заказчика" Click="AddCustomerButton_Click"/>
+
+            <Label Content="Стоимость заказа:"/>
+            <TextBox x:Name="CostTextBox" IsEnabled="False"/>
+
+            <Label Content="Плановая дата изготовления:"/>
+            <DatePicker x:Name="PlannedCompletionDatePicker" IsEnabled="False"/>
+
+            <Label Content="Дата заказа:"/>
+            <TextBox x:Name="OrderDateTextBox" IsEnabled="False"   />
+
+            <Label Content="Описание изделия:"/>
+            <TextBox x:Name="DescriptionTextBox" AcceptsReturn="True" Height="60"/>
+
+            <Label Content="Замеры:"/>
+            <ItemsControl x:Name="MeasurementsItemsControl" />
+            <Button Content="Добавить замер" Click="AddMeasurementButton_Click"/>
+
+            <Label Content="Схемы и чертежи:"/>
+            <Button Content="Добавить файл" Click="AddFileButton_Click"/>
+
+            <Button Content="Сохранить заказ" Click="SaveOrderButton_Click"/>
+        </StackPanel>
+    </Grid>
+</Page>

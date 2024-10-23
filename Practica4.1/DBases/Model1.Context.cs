@@ -13,10 +13,10 @@ namespace Practica4._1.DBases
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class UchebkaEntities : DbContext
+    public partial class UchebkaEntities1 : DbContext
     {
-        public UchebkaEntities()
-            : base("name=UchebkaEntities")
+        public UchebkaEntities1()
+            : base("name=UchebkaEntities1")
         {
         }
     
@@ -31,21 +31,24 @@ namespace Practica4._1.DBases
         public virtual DbSet<Equipment> Equipment { get; set; }
         public virtual DbSet<Material> Material { get; set; }
         public virtual DbSet<MaterialImage> MaterialImage { get; set; }
+        public virtual DbSet<Operation> Operation { get; set; }
         public virtual DbSet<OperationSpecification> OperationSpecification { get; set; }
         public virtual DbSet<Order> Order { get; set; }
         public virtual DbSet<Product> Product { get; set; }
         public virtual DbSet<ProductAccessories> ProductAccessories { get; set; }
         public virtual DbSet<ProductDetail> ProductDetail { get; set; }
+        public virtual DbSet<ProductMaterial> ProductMaterial { get; set; }
         public virtual DbSet<Role> Role { get; set; }
         public virtual DbSet<Size> Size { get; set; }
+        public virtual DbSet<Sklad> Sklad { get; set; }
         public virtual DbSet<Standart> Standart { get; set; }
         public virtual DbSet<Supplier> Supplier { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<TypeAccessories> TypeAccessories { get; set; }
         public virtual DbSet<TypeEquipment> TypeEquipment { get; set; }
         public virtual DbSet<TypeMaterial> TypeMaterial { get; set; }
         public virtual DbSet<Unit> Unit { get; set; }
         public virtual DbSet<User> User { get; set; }
         public virtual DbSet<UserImage> UserImage { get; set; }
+        public virtual DbSet<UserOperation> UserOperation { get; set; }
     }
 }

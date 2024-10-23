@@ -24,75 +24,60 @@ namespace Practica4._1.Pages
         public ListEmploye()
         {
             InitializeComponent();
-            App.listEmploye = this;
-            refresh();
+            SortCb.SelectedIndex = 0;
         }
-        public void refresh()
+        public void Refresh()
         {
-            IEnumerable<User> SortList = App.db.User.Where(x => x.RoleId == 1 || x.RoleId == 2 || x.RoleId == 5).ToList();
-            var Item = SortCb.SelectedItem;
-            if (Item != null)
-            {
-                if (SortCb.SelectedIndex == 0)
-                {
-                    SortList = SortList.OrderBy(x => x.LastName);
-                }
-                else
-                {
-                    SortList = SortList.OrderByDescending(x => x.LastName);
-                }
-            }
-            if (SearchTb.Text != null) 
-            {
-                SortList = SortList.Where(x => x.LastName.ToLower().Contains(SearchTb.Text.ToLower()));
-            }
-            MyList.ItemsSource = SortList.ToList();
+            IEnumerable<User> employee = App.db.User.Where(x => x.RoleId != 4);
 
+            if (SearchTb.Text != "")
+                employee = employee.Where(x => x.FIO.Contains(SearchTb.Text));
+
+
+            if (SortCb.SelectedIndex == 1)
+                employee = employee.OrderBy(x => x.LastName);
+            else if (SortCb.SelectedIndex == 2)
+                employee = employee.OrderByDescending(x => x.LastName);
+            else if (SortCb.SelectedIndex == 3)
+                employee = employee.OrderBy(x => x.Age);
+            else if (SortCb.SelectedIndex == 4)
+                employee = employee.OrderByDescending(x => x.Age);
+            else if (SortCb.SelectedIndex == 5)
+                employee = employee.OrderBy(x => x.RoleId);
+
+
+            MyList.ItemsSource = employee.ToList();
         }
 
         private void AddEmployeeBtn_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new AddEditEmployeePage( new User()));
+            App.listEmploye = this;
+            NavigationService.Navigate(new AddEditEmployeePage(new User(), true));
         }
 
-
-        private void SortCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void Delete_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            refresh();
+            if (Methods.TakeChoice("Вы точно хотите удалить сотрудника?"))
+            {
+                App.db.User.Remove((sender as Image).DataContext as User);
+                Methods.TakeInformation("Успешно удалено!");
+            }
+        }
+
+        private void Edit_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            App.listEmploye = this;
+            NavigationService.Navigate(new AddEditEmployeePage((sender as Image).DataContext as User, false, "Редактировать сотрудника"));
         }
 
         private void SearchTb_TextChanged(object sender, TextChangedEventArgs e)
         {
-            refresh();
+            Refresh();
         }
 
-        private void EditBtn_Click(object sender, RoutedEventArgs e)
+        private void SortCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            User emp = (sender as Button).DataContext as User;
-            if (emp != null)
-            {
-                NavigationService.Navigate(new AddEditEmployeePage(emp));
-            }
-        }
-
-        private void DeleteBtn_Click(object sender, RoutedEventArgs e)
-        {
-            User emp = (sender as Button).DataContext as User;
-            if (emp != null)
-            {
-                if (emp.Login == App.currentUser.Login)
-                {
-                    MessageBox.Show("Вы не можете удалить себя из базы данных!");
-                    return;
-                }
-                
-                App.db.User.Remove(emp);
-                App.db.SaveChanges();
-                refresh();
-                MessageBox.Show("✦  Сотрудник успешно удален!  ✦");
-            }
-            else
-                MessageBox.Show("Вы не выбрали сотрудника из листа!!");
+            Refresh();
         }
     }
 }

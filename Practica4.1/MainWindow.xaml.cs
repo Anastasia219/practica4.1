@@ -23,9 +23,21 @@ namespace Practica4._1
                     MainFrame.Navigate(new Autorization());
                     return;
                 }
-                MainFrame.Navigate(new Zaglu());
-                Exit.Visibility = Visibility.Visible;
-                Person.Visibility = Visibility.Visible;
+                if (App.currentUser.RoleId == 3)
+                {
+                    App.mainWindow.SetIcons(true, true, true, true);
+                    MainFrame.Navigate(new ListEmploye());
+                }
+                else if (App.currentUser.RoleId == 4)
+                {
+                    App.mainWindow.SetIcons(false, false, true, true);
+                    MainFrame.Navigate(new Zaglu());
+                }
+                else
+                {
+                    App.mainWindow.SetIcons(false, true, true, true);
+                    MainFrame.Navigate(new ComponAndMater());
+                }
                 Methods.TakeInformation("Вы успешно зашли в систему!");
             }
             else
@@ -44,6 +56,27 @@ namespace Practica4._1
             MainFrame.Navigate(new Autorization());
             Exit.Visibility = Visibility.Collapsed;
             Person.Visibility = Visibility.Collapsed;
+        }
+        public void SetIcons(bool employee, bool materials, bool exit, bool account)
+        {
+            Employee.Visibility = employee ? Visibility.Visible : Visibility.Collapsed;
+            Material.Visibility = materials ? Visibility.Visible : Visibility.Collapsed;
+            Person.Visibility = account ? Visibility.Visible : Visibility.Collapsed;
+            Exit.Visibility = exit ? Visibility.Visible : Visibility.Collapsed;
+        }
+        private void Material_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            MainFrame.Navigate(new ComponAndMater());
+        }
+
+        private void Employee_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            MainFrame.Navigate(new ListEmploye());
+        }
+
+        private void Person_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            MainFrame.Navigate(new AddEditEmployeePage(App.currentUser, false, "Ваш профиль"));
         }
     }
 }

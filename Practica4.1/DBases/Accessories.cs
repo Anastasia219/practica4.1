@@ -29,8 +29,10 @@ namespace Practica4._1.DBases
         public Nullable<int> IdTypeAccessories { get; set; }
         public Nullable<decimal> Price { get; set; }
         public Nullable<decimal> Weight { get; set; }
+        public Nullable<int> IdSklad { get; set; }
     
         public virtual AcessoriesImage AcessoriesImage { get; set; }
+        public virtual Sklad Sklad { get; set; }
         public virtual Supplier Supplier { get; set; }
         public virtual TypeAccessories TypeAccessories { get; set; }
         public virtual Unit Unit { get; set; }

@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\User\source\repos\Practica4.1\Practica4.1\App.xaml
-6-1980829599
+8648018427
 2705613953
-36-987094166
+43-1724176883
 18-1654147507
-MainWindow.xaml;Pages\AddEditEmployeePage.xaml;Pages\Autorization.xaml;Pages\ListEmploye.xaml;Pages\Registration.xaml;Pages\Zaglu.xaml;
+MainWindow.xaml;Pages\AddEditEmployeePage.xaml;Pages\AddEditMaterial.xaml;Pages\Autorization.xaml;Pages\ComponAndMater.xaml;Pages\ListEmploye.xaml;Pages\Registration.xaml;Pages\Zaglu.xaml;
 
-False
+True
 

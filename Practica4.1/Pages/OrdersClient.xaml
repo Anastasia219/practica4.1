@@ -1,0 +1,40 @@
+﻿<Page x:Class="Practica4._1.Pages.OrdersClient"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Practica4._1.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="OrdersClient">
+
+    <Grid>
+        <StackPanel>
+            <ComboBox x:Name="StatusFilterComboBox" >
+                <ComboBoxItem Content="Все заказы" />
+                <ComboBoxItem Content="Новые" />
+                <ComboBoxItem Content="Выполненные" />
+                <ComboBoxItem Content="Текущие" />
+                <ComboBoxItem Content="Отклоненные" />
+            </ComboBox>
+
+            <ListView x:Name="OrdersListView" >
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="№ Заказа" DisplayMemberBinding="{Binding OrderNumber}" Width="100"/>
+                        <GridViewColumn Header="Дата заказа" DisplayMemberBinding="{Binding OrderDate}" Width="100"/>
+                        <GridViewColumn Header="Наименование" DisplayMemberBinding="{Binding OrderName}" Width="150"/>
+                        <GridViewColumn Header="Статус" DisplayMemberBinding="{Binding Status}" Width="100"/>
+                        <GridViewColumn Header="Стоимость" DisplayMemberBinding="{Binding Cost}" Width="100"/>
+                        <GridViewColumn Header="Заказчик" DisplayMemberBinding="{Binding Customer}" Width="100"/>
+                        <GridViewColumn Header="Плановая дата выполнения" DisplayMemberBinding="{Binding PlannedCompletionDate}" Width="150"/>
+                        <GridViewColumn Header="Менеджер" DisplayMemberBinding="{Binding ResponsibleManager}" Width="100"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+
+            <Button Content="Изменить статус"  />
+            <Button Content="Просмотр истории"  />
+        </StackPanel>
+    </Grid>
+</Page>

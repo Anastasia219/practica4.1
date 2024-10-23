@@ -39,10 +39,25 @@ namespace Practica4._1.Pages
                 if (RememberCb.IsChecked == true)
                     File.WriteAllText(@"RememberMe.txt", user.Login);
                 App.currentUser = user;
-                NavigationService.Navigate(new ListEmploye());
+
+
+                if (user.RoleId == 3)
+                {
+                    App.mainWindow.SetIcons(true, true, true, true);
+                    NavigationService.Navigate(new ListEmploye());
+                }
+                else if (user.RoleId == 4)
+                {
+                    App.mainWindow.SetIcons(false, false, true, true);
+                    NavigationService.Navigate(new Zaglu());
+                }
+                else
+                {
+                    App.mainWindow.SetIcons(false, true, true, true);
+                    NavigationService.Navigate(new ComponAndMater());
+                }
+
                 Methods.TakeInformation("Вы успешно зашли в систему!");
-                App.mainWindow.Exit.Visibility = Visibility.Visible;
-                App.mainWindow.Person.Visibility = Visibility.Visible;
             }
             else
                 Methods.TakeInformation("Неверный логин или пароль!");
