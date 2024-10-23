@@ -40,7 +40,7 @@ namespace Practica4._1.Pages
 
         private bool ValidateForm()
         {
-            // Простая валидация формы
+            
             if (string.IsNullOrWhiteSpace(OrderNameTextBox.Text) || CustomerComboBox.SelectedItem == null)
             {
                 MessageBox.Show("Заполните наименование заказа и выберите заказчика.");
