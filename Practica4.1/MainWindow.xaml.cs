@@ -25,17 +25,22 @@ namespace Practica4._1
                 }
                 if (App.currentUser.RoleId == 3)
                 {
-                    App.mainWindow.SetIcons(true, true, true, true);
+                    App.mainWindow.SetIcons(true, true, true, true, true, true, false, false);
                     MainFrame.Navigate(new ListEmploye());
                 }
                 else if (App.currentUser.RoleId == 4)
                 {
-                    App.mainWindow.SetIcons(false, false, true, true);
-                    MainFrame.Navigate(new Zaglu());
+                    App.mainWindow.SetIcons(false, false, true, true, false, true, false, false);
+                    MainFrame.Navigate(new OrdersClient());
+                }
+                else if (App.currentUser.RoleId == 1)
+                {
+                    App.mainWindow.SetIcons(false, true, true, true, false, true, true, true);
+                    MainFrame.Navigate(new ComponAndMater());
                 }
                 else
                 {
-                    App.mainWindow.SetIcons(false, true, true, true);
+                    App.mainWindow.SetIcons(false, true, true, true, false, true, false, false);
                     MainFrame.Navigate(new ComponAndMater());
                 }
                 Methods.TakeInformation("Вы успешно зашли в систему!");
@@ -43,10 +48,19 @@ namespace Practica4._1
             else
                 MainFrame.Navigate(new Autorization());
         }
-        private void Image_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+
+        public void SetIcons(bool employee, bool materials, bool exit, bool account, bool plan, bool order, bool failure, bool test)
         {
-            Application.Current.Shutdown();
+            Employee.Visibility = employee ? Visibility.Visible : Visibility.Collapsed;
+            Material.Visibility = materials ? Visibility.Visible : Visibility.Collapsed;
+            Person.Visibility = account ? Visibility.Visible : Visibility.Collapsed;
+            Exit.Visibility = exit ? Visibility.Visible : Visibility.Collapsed;
+            Plan.Visibility = plan ? Visibility.Visible : Visibility.Collapsed;
+            Order.Visibility = order ? Visibility.Visible : Visibility.Collapsed;
+            Failure.Visibility = failure ? Visibility.Visible : Visibility.Collapsed;
+            Test.Visibility = test ? Visibility.Visible : Visibility.Collapsed;
         }
+        
 
         private void Exit_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
@@ -57,13 +71,7 @@ namespace Practica4._1
             Exit.Visibility = Visibility.Collapsed;
             Person.Visibility = Visibility.Collapsed;
         }
-        public void SetIcons(bool employee, bool materials, bool exit, bool account)
-        {
-            Employee.Visibility = employee ? Visibility.Visible : Visibility.Collapsed;
-            Material.Visibility = materials ? Visibility.Visible : Visibility.Collapsed;
-            Person.Visibility = account ? Visibility.Visible : Visibility.Collapsed;
-            Exit.Visibility = exit ? Visibility.Visible : Visibility.Collapsed;
-        }
+        
         private void Material_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             MainFrame.Navigate(new ComponAndMater());
@@ -77,6 +85,25 @@ namespace Practica4._1
         private void Person_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             MainFrame.Navigate(new AddEditEmployeePage(App.currentUser, false, "Ваш профиль"));
+        }
+
+        private void Plan_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            MainFrame.Navigate(new Sech());
+        }
+
+        private void Order_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            MainFrame.Navigate(new OrdersClient());
+        }
+        private void Failure_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            MainFrame.Navigate(new FailurePage());
+        }
+
+        private void Test_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            MainFrame.Navigate(new TestPage());
         }
     }
 }

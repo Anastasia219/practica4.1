@@ -111,7 +111,7 @@ namespace Practica4._1.Pages
             if (ArticleTb.Text == "" && mistake == "")
                 mistake = "Вы не заполнили артикуль!";
             if (App.db.Material.Any(x => x.Article == ArticleTb.Text) && (oldArticle != ArticleTb.Text || isNew) && mistake == "")
-                mistake = "Такой артикуль уже есть!";
+                mistake = "Такой артикул уже есть!";
             if (NameTb.Text == "" && mistake == "")
                 mistake = "Вы не заполнили наименование!";
             if (SupplierCb.SelectedIndex == -1 && mistake == "")

@@ -17,7 +17,8 @@ namespace Practica4._1.DBases
         public int Id { get; set; }
         public string Name { get; set; }
         public string Format { get; set; }
-        public Nullable<int> IdOrder { get; set; }
+        public string OrderNumber { get; set; }
+        public byte[] Bytes { get; set; }
     
         public virtual Order Order { get; set; }
     }

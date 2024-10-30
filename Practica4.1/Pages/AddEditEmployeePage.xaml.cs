@@ -62,7 +62,6 @@ namespace Practica4._1.Pages
             this.user = user;
             this.isNew = isNew;
             DataContext = this.user;
-
             operations = user.Operation.ToList();
             Refresh();
         }

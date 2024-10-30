@@ -7,36 +7,59 @@
       mc:Ignorable="d" 
       d:DesignHeight="650" d:DesignWidth="1000"
       Title="AddOrders">
-
     <Grid>
-        <StackPanel Margin="10">
-            <Label Content="Наименование заказа:"/>
-            <TextBox x:Name="OrderNameTextBox"/>
+        <StackPanel x:Name="MainPanel" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock x:Name="TitleTb" FontWeight="Bold" FontSize="20" Foreground="#FFBB0C07" HorizontalAlignment="Center" Margin="0 0 0 20">Добавить заказ</TextBlock>
+            <StackPanel Orientation="Horizontal" >
+                <StackPanel VerticalAlignment="Center">
+                    <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                        <TextBlock Width="100">№</TextBlock>
+                        <TextBox x:Name="OrderNumberTb" IsReadOnly="True" Width="300" Text="{Binding OrderNumber}"></TextBox>
+                    </StackPanel>
+                    <StackPanel x:Name="NamePanel" Orientation="Horizontal" Margin="0 0 0 10">
+                        <TextBlock Width="100">Наименование</TextBlock>
+                        <TextBox x:Name="NameTb" Width="300" Text="{Binding Name}"></TextBox>
+                    </StackPanel>
+                    <StackPanel x:Name="ClientPanel" Orientation="Horizontal" Margin="0 0 0 10">
+                        <TextBlock Width="100" VerticalAlignment="Center">Заказчик</TextBlock>
+                        <ComboBox Width="300" x:Name="ClientCb" DisplayMemberPath="FIO"></ComboBox>
+                    </StackPanel>
+                    <StackPanel x:Name="ManagerPanel" Visibility="Collapsed" Orientation="Horizontal" Margin="0 0 0 10">
+                        <TextBlock Width="100" VerticalAlignment="Center">Менеджер</TextBlock>
+                        <TextBox IsReadOnly="True" Width="300" x:Name="EmployeeTb"></TextBox>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                        <TextBlock Width="100">Стоимость</TextBlock>
+                        <TextBox x:Name="AmountTb" Width="300"  Text="{Binding Amount}"></TextBox>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                        <TextBlock Width="100" VerticalAlignment="Center">Дата окончания</TextBlock>
+                        <DatePicker x:Name="DateEndDp" Width="300" SelectedDate="{Binding DateEnd}"></DatePicker>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                        <TextBlock VerticalAlignment="Center" Width="100">Дата заказа</TextBlock>
+                        <DatePicker x:Name="DateOrderDp" Width="300" IsEnabled="False"></DatePicker>
+                    </StackPanel>
 
-            <Label Content="Заказчик:"/>
-            <ComboBox x:Name="CustomerComboBox"/>
-            <Button Content="Добавить заказчика" Click="AddCustomerButton_Click"/>
+                </StackPanel>
 
-            <Label Content="Стоимость заказа:"/>
-            <TextBox x:Name="CostTextBox" IsEnabled="False"/>
+            </StackPanel>
+            <Button x:Name="SaveBtn" Style="{StaticResource StilyzedButton}" Margin="0 10 0 0" Width="300" Click="SaveBtn_Click">Сохранить</Button>
+        </StackPanel>
 
-            <Label Content="Плановая дата изготовления:"/>
-            <DatePicker x:Name="PlannedCompletionDatePicker" IsEnabled="False"/>
+        <Image x:Name="Back" Style="{StaticResource InteractionImage}" Source="{StaticResource arrow_ios_back_svgrepo_comDrawingImage}" Width="40" Height="40" Margin="10" HorizontalAlignment="Left" VerticalAlignment="Top" MouseDown="Back_MouseDown"></Image>
+        <Image x:Name="Menu" Style="{StaticResource InteractionImage}" Source="{StaticResource menu_svgrepo_comDrawingImage}" Width="30" Height="30" Margin="15 35" HorizontalAlignment="Right" VerticalAlignment="Top" MouseDown="Menu_MouseDown"></Image>
 
-            <Label Content="Дата заказа:"/>
-            <TextBox x:Name="OrderDateTextBox" IsEnabled="False"   />
+        <Rectangle Grid.RowSpan="2" Fill="#7F000000" x:Name="MyRectangle" Visibility="Collapsed" MouseDown="MyRectangle_MouseDown"  ></Rectangle>
+        <StackPanel x:Name="MyPanel"  RenderTransformOrigin="0.5,0.5" Visibility="Collapsed" Background="White" HorizontalAlignment="Right" Width="300" Grid.RowSpan="2" >
+            <StackPanel.RenderTransform>
+                <TranslateTransform x:Name="myTranslateTransform"></TranslateTransform>
+            </StackPanel.RenderTransform>
 
-            <Label Content="Описание изделия:"/>
-            <TextBox x:Name="DescriptionTextBox" AcceptsReturn="True" Height="60"/>
-
-            <Label Content="Замеры:"/>
-            <ItemsControl x:Name="MeasurementsItemsControl" />
-            <Button Content="Добавить замер" Click="AddMeasurementButton_Click"/>
-
-            <Label Content="Схемы и чертежи:"/>
-            <Button Content="Добавить файл" Click="AddFileButton_Click"/>
-
-            <Button Content="Сохранить заказ" Click="SaveOrderButton_Click"/>
+            <StackPanel VerticalAlignment="Top" HorizontalAlignment="Center" Width="280">
+                <Button x:Name="DocumentBtn" Margin="10 30 10 0" Style="{StaticResource StilyzedButton}" Click="DocumentBtn_Click">Документы заказа</Button>
+                <Button x:Name="ProductBtn" Margin="10 10 10 0" Style="{StaticResource StilyzedButton}" Click="ProductBtn_Click">Изделия заказа</Button>
+            </StackPanel>
         </StackPanel>
     </Grid>
 </Page>

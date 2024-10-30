@@ -47,7 +47,7 @@
                         </TextBox>
                         <TextBlock Margin="40 0 0 0" VerticalAlignment="Center">Сортировать</TextBlock>
                         <ComboBox x:Name="MaterialSortCb" Height="25" Width="200" Margin="15 0" SelectionChanged="MaterialSortCb_SelectionChanged" >
-                            <ComboBoxItem>Нет</ComboBoxItem>
+                            
                             <ComboBoxItem>По Артиклу</ComboBoxItem>
                             <ComboBoxItem>По наименованию в алфавитном</ComboBoxItem>
                             <ComboBoxItem>По наименованию против алфавитного</ComboBoxItem>
@@ -88,7 +88,7 @@
                     </ListView>
                     <StackPanel Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
                         <TextBlock x:Name="MaterialCountTb" FontWeight="Bold">16 из 100</TextBlock>
-                        <TextBlock FontWeight="Bold" Margin="40 0 0 0">общая закупочная стоимость:</TextBlock>
+                        <TextBlock FontWeight="Bold" Margin="40 0 0 0">Общая закупочная стоимость:</TextBlock>
                         <TextBlock x:Name="MaterialPriceTb" FontWeight="Bold" Margin="10 0 0 0">10000 руб.</TextBlock>
                     </StackPanel>
                 </Grid>
@@ -132,7 +132,7 @@
                         </TextBox>
                         <TextBlock Margin="40 0 0 0" VerticalAlignment="Center">Сортировать</TextBlock>
                         <ComboBox x:Name="AccessoriesSortCb" Height="25" Width="200" Margin="15 0" SelectionChanged="AccessoriesSortCb_SelectionChanged">
-                            <ComboBoxItem>Нет</ComboBoxItem>
+                            
                             <ComboBoxItem>По Артиклу</ComboBoxItem>
                             <ComboBoxItem>По наименованию в алфавитном</ComboBoxItem>
                             <ComboBoxItem>По наименованию против алфавитного</ComboBoxItem>

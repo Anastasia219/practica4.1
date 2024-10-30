@@ -14,10 +14,18 @@ namespace Practica4._1.DBases
     
     public partial class Equipment
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Equipment()
+        {
+            this.HardwareFailure = new HashSet<HardwareFailure>();
+        }
+    
         public string Model { get; set; }
         public Nullable<int> IdTypeEquipment { get; set; }
         public string Characteristic { get; set; }
     
         public virtual TypeEquipment TypeEquipment { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<HardwareFailure> HardwareFailure { get; set; }
     }
 }

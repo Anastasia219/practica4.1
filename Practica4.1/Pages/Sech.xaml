@@ -10,31 +10,47 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="7*"/>
+            <RowDefinition Height="68*"/>
         </Grid.RowDefinitions>
 
-        <!-- Выпадающий список для выбора цеха -->
-        <ComboBox x:Name="WorkshopComboBox" SelectionChanged="WorkshopComboBox_SelectionChanged">
-            <!-- Заполняется программно -->
-        </ComboBox>
+        <Grid Grid.Row="0">
+            <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
+                <TextBlock FontSize="24" Foreground="#FFBB0C07" FontWeight="Bold" Margin="30 0 20 0">Цех</TextBlock>
+                <ComboBox x:Name="WorkshopCb" DisplayMemberPath="Name" Width="200" SelectionChanged="WorkshopCb_SelectionChanged"></ComboBox>
+            </StackPanel>
 
-        <!-- Панель инструментов с значками -->
-        <ToolBar>
-            <Button x:Name="AddEquipmentBtn" Content="Добавить оборудование" MouseMove="AddEquipmentBtn_MouseMove"/>
-            <Button x:Name="AddExtinguisherBtn" Content="Добавить огнетушитель" MouseMove="AddExtinguisherBtn_MouseMove"/>
-            <Button x:Name="AddFirstAidBtn" Content="Добавить аптечку" MouseMove="AddFirstAidBtn_MouseMove"/>
-        </ToolBar>
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
+                <Button x:Name="ClearBtn" Style="{StaticResource StilyzedButton}" Width="100" Margin="0 0 30 0" Click="ClearBtn_Click">Очистить</Button>
+                <Button x:Name="SaveBtn" Style="{StaticResource StilyzedButton}" Width="200" Margin="0 0 30 0" Click="SaveBtn_Click">Сохранить изменения</Button>
+            </StackPanel>
+        </Grid>
 
-        <!-- Поле для отображения плана -->
-        <Canvas x:Name="PlanCanvas" Grid.Row="1" Background="LightGray"
-                MouseMove="PlanCanvas_MouseMove" MouseLeftButtonDown="PlanCanvas_MouseLeftButtonDown"
-                MouseLeftButtonUp="PlanCanvas_MouseLeftButtonUp"/>
+        <Canvas x:Name="canvas" Grid.Row="1" Margin="10" Drop="canvas_Drop" MouseWheel="canvas_MouseWheel">
+            <Canvas.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform x:Name="scaleTransform" />
+                    <TranslateTransform x:Name="translateTransform" />
+                </TransformGroup>
+            </Canvas.RenderTransform>
+            <Rectangle x:Name="Origin" Fill="Red" Width="1" Height="1" Canvas.Left="350" Canvas.Top="250"></Rectangle>
+            <Image Name="PlanImage" AllowDrop="True"  Margin="10" MaxHeight="500" MaxWidth="800" />
+        </Canvas>
 
-        <!-- Кнопки управления -->
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button Content="Сохранить" Click="SaveButton_Click"/>
-            <Button Content="Отменить" Click="CancelButton_Click"/>
+        <StackPanel x:Name="MyFilterPanel"  RenderTransformOrigin="0.5,0.5" Visibility="Visible" Background="White" HorizontalAlignment="Right" Width="200" Margin="0 5 0 0" Grid.Row="1" >
+            <StackPanel.RenderTransform>
+                <TranslateTransform x:Name="myTranslateTransform"></TranslateTransform>
+            </StackPanel.RenderTransform>
+            <StackPanel.Effect>
+                <DropShadowEffect Direction="221" BlurRadius="20" ShadowDepth="5" Color="#FFACACAC"></DropShadowEffect>
+            </StackPanel.Effect>
+
+            <StackPanel VerticalAlignment="Top" HorizontalAlignment="Center" Width="180">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" Height="470" Margin="5 5 0 0" HorizontalScrollBarVisibility="Disabled">
+                    <WrapPanel x:Name="ItemPanel"></WrapPanel>
+                </ScrollViewer>
+            </StackPanel>
         </StackPanel>
     </Grid>
 </Page>
+

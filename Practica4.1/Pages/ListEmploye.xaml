@@ -42,7 +42,7 @@
             </TextBox>
             <TextBlock Margin="40 0 0 0" VerticalAlignment="Center">Сортировать</TextBlock>
             <ComboBox x:Name="SortCb" Height="25" Width="200" Margin="15 0" SelectionChanged="SortCb_SelectionChanged">
-                <ComboBoxItem>Нет</ComboBoxItem>
+                
                 <ComboBoxItem>По фамилии в алфавитном</ComboBoxItem>
                 <ComboBoxItem>По фамилии против алфавитного</ComboBoxItem>
                 <ComboBoxItem>По возрасту в порядке возрастания</ComboBoxItem>

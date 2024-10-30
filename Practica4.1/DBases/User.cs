@@ -20,7 +20,6 @@ namespace Practica4._1.DBases
             this.Operation = new HashSet<Operation>();
             this.Order = new HashSet<Order>();
             this.Order1 = new HashSet<Order>();
-            this.UserOperation = new HashSet<UserOperation>();
         }
     
         public string Login { get; set; }
@@ -43,7 +42,5 @@ namespace Practica4._1.DBases
         public virtual ICollection<Order> Order1 { get; set; }
         public virtual Role Role { get; set; }
         public virtual UserImage UserImage { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UserOperation> UserOperation { get; set; }
     }
 }

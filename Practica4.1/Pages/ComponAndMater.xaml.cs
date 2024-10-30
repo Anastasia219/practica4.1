@@ -135,6 +135,7 @@ namespace Practica4._1.Pages
                 RefreshMaterial();
                 Methods.TakeInformation("Успешно удалено");
             }
+            Methods.TakeWarning("Sigma! uff");
         }
 
         private void DeleteAccessories_MouseDown(object sender, MouseButtonEventArgs e)

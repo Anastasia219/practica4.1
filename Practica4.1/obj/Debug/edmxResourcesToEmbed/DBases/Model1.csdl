@@ -33,11 +33,12 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Format" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-    <Property Name="IdOrder" Type="Int32" />
-    <NavigationProperty Name="Order" Relationship="Self.FK_Document_Order" FromRole="Document" ToRole="Order" />
+    <Property Name="OrderNumber" Type="String" MaxLength="12" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Bytes" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <NavigationProperty Name="Order" Relationship="Self.FK_Document_Order1" FromRole="Document" ToRole="Order" />
   </EntityType>
   <EntityType Name="Equipment">
     <Key>
@@ -47,6 +48,38 @@
     <Property Name="IdTypeEquipment" Type="Int32" />
     <Property Name="Characteristic" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="TypeEquipment" Relationship="Self.FK_Equipment_TypeEquipment" FromRole="Equipment" ToRole="TypeEquipment" />
+    <NavigationProperty Name="HardwareFailure" Relationship="Self.FK_HardwareFailure_Equipment" FromRole="Equipment" ToRole="HardwareFailure" />
+  </EntityType>
+  <EntityType Name="HardwareFailure">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Model" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="FailureStart" Type="DateTime" Precision="3" />
+    <Property Name="FailureEnd" Type="DateTime" Precision="3" />
+    <Property Name="Reason" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Equipment" Relationship="Self.FK_HardwareFailure_Equipment" FromRole="HardwareFailure" ToRole="Equipment" />
+  </EntityType>
+  <EntityType Name="Item">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Location">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdWorkshop" Type="Int32" Nullable="false" />
+    <Property Name="IdItem" Type="Int32" Nullable="false" />
+    <Property Name="FromLeft" Type="Decimal" Precision="10" Scale="1" />
+    <Property Name="FromUp" Type="Decimal" Precision="10" Scale="1" />
+    <NavigationProperty Name="WorkshopItem" Relationship="Self.FK_Location_WorkshopItem" FromRole="Location" ToRole="WorkshopItem" />
+    <NavigationProperty Name="WorkshopItem1" Relationship="Self.FK_Location_WorkshopItem1" FromRole="Location" ToRole="WorkshopItem" />
   </EntityType>
   <EntityType Name="Material">
     <Key>
@@ -88,7 +121,6 @@
     <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Login" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
     <NavigationProperty Name="User" Relationship="Self.FK_Operation_User" FromRole="Operation" ToRole="User" />
-    <NavigationProperty Name="UserOperation" Relationship="Self.FK_UserOperation_Operation" FromRole="Operation" ToRole="UserOperation" />
   </EntityType>
   <EntityType Name="OperationSpecification">
     <Key>
@@ -106,9 +138,9 @@
   </EntityType>
   <EntityType Name="Order">
     <Key>
-      <PropertyRef Name="Id" />
+      <PropertyRef Name="OrderNumber" />
     </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="OrderNumber" Type="String" MaxLength="12" FixedLength="true" Unicode="true" Nullable="false" />
     <Property Name="DateOrder" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="IdProduct" Type="Int32" />
@@ -116,16 +148,27 @@
     <Property Name="LoginManager" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="Amount" Type="Decimal" Precision="10" Scale="2" />
     <Property Name="DateEnd" Type="DateTime" Precision="0" />
-    <NavigationProperty Name="Document" Relationship="Self.FK_Document_Order" FromRole="Order" ToRole="Document" />
+    <NavigationProperty Name="Document" Relationship="Self.FK_Document_Order1" FromRole="Order" ToRole="Document" />
     <NavigationProperty Name="Product" Relationship="Self.FK_Order_Product" FromRole="Order" ToRole="Product" />
     <NavigationProperty Name="User" Relationship="Self.FK_Order_User2" FromRole="Order" ToRole="User" />
     <NavigationProperty Name="User1" Relationship="Self.FK_Order_User3" FromRole="Order" ToRole="User" />
+    <NavigationProperty Name="StatusOrder" Relationship="Self.FK_StatusOrder_Order1" FromRole="Order" ToRole="StatusOrder" />
+  </EntityType>
+  <EntityType Name="OrderStatus">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="StatusOrder" Relationship="Self.FK_StatusOrder_OrderStatus" FromRole="OrderStatus" ToRole="StatusOrder" />
+    <NavigationProperty Name="StatusOrder1" Relationship="Self.FK_StatusOrder_OrderStatus1" FromRole="OrderStatus" ToRole="StatusOrder" />
   </EntityType>
   <EntityType Name="Product">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="OperationSpecification" Relationship="Self.FK_OperationSpecification_Product" FromRole="Product" ToRole="OperationSpecification" />
     <NavigationProperty Name="Order" Relationship="Self.FK_Order_Product" FromRole="Product" ToRole="Order" />
@@ -134,6 +177,7 @@
     <NavigationProperty Name="ProductDetail1" Relationship="Self.FK_ProductDetail_Product1" FromRole="Product" ToRole="ProductDetail" />
     <NavigationProperty Name="ProductMaterial" Relationship="Self.FK_ProductMaterial_Product" FromRole="Product" ToRole="ProductMaterial" />
     <NavigationProperty Name="Size" Relationship="Self.FK_Size_Product" FromRole="Product" ToRole="Size" />
+    <NavigationProperty Name="Test" Relationship="Self.FK_Test_Product" FromRole="Product" ToRole="Test" />
   </EntityType>
   <EntityType Name="ProductAccessories">
     <Key>
@@ -148,11 +192,11 @@
   </EntityType>
   <EntityType Name="ProductDetail">
     <Key>
-      <PropertyRef Name="IdProduct" />
-      <PropertyRef Name="IdDetail" />
+      <PropertyRef Name="Id" />
     </Key>
-    <Property Name="IdProduct" Type="Int32" Nullable="false" />
-    <Property Name="IdDetail" Type="Int32" Nullable="false" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdProduct" Type="Int32" />
+    <Property Name="IdDetail" Type="Int32" />
     <Property Name="Count" Type="Int32" />
     <NavigationProperty Name="Product" Relationship="Self.FK_ProductDetail_Product" FromRole="ProductDetail" ToRole="Product" />
     <NavigationProperty Name="Product1" Relationship="Self.FK_ProductDetail_Product1" FromRole="ProductDetail" ToRole="Product" />
@@ -161,7 +205,7 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="IdProduct" Type="Int32" />
     <Property Name="MaterialArticle" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Count" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
@@ -180,7 +224,7 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="SizeValue" Type="Decimal" Precision="10" Scale="2" />
     <Property Name="IdUnit" Type="Int32" />
@@ -205,6 +249,21 @@
     <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Material" Relationship="Self.FK_Material_Standart" FromRole="Standart" ToRole="Material" />
   </EntityType>
+  <EntityType Name="StatusOrder">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdStatus" Type="Int32" />
+    <Property Name="IdOldStatus" Type="Int32" />
+    <Property Name="DateChange" Type="DateTime" Precision="0" />
+    <Property Name="TimeChange" Type="Time" Precision="7" />
+    <Property Name="OrderNumber" Type="String" MaxLength="12" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Order" Relationship="Self.FK_StatusOrder_Order1" FromRole="StatusOrder" ToRole="Order" />
+    <NavigationProperty Name="OrderStatus" Relationship="Self.FK_StatusOrder_OrderStatus" FromRole="StatusOrder" ToRole="OrderStatus" />
+    <NavigationProperty Name="OrderStatus1" Relationship="Self.FK_StatusOrder_OrderStatus1" FromRole="StatusOrder" ToRole="OrderStatus" />
+  </EntityType>
   <EntityType Name="Supplier">
     <Key>
       <PropertyRef Name="SupplierName" />
@@ -214,6 +273,17 @@
     <Property Name="DeliveryTime" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Accessories" Relationship="Self.FK_Accessories_Supplier1" FromRole="Supplier" ToRole="Accessories" />
     <NavigationProperty Name="Material" Relationship="Self.FK_Material_Supplier" FromRole="Supplier" ToRole="Material" />
+  </EntityType>
+  <EntityType Name="Test">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="isPassed" Type="Boolean" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IdProduct" Type="Int32" />
+    <NavigationProperty Name="Product" Relationship="Self.FK_Test_Product" FromRole="Test" ToRole="Product" />
   </EntityType>
   <EntityType Name="TypeAccessories">
     <Key>
@@ -227,7 +297,7 @@
     <Key>
       <PropertyRef Name="IdTypeEquipment" />
     </Key>
-    <Property Name="IdTypeEquipment" Type="Int32" Nullable="false" />
+    <Property Name="IdTypeEquipment" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Equipment" Relationship="Self.FK_Equipment_TypeEquipment" FromRole="TypeEquipment" ToRole="Equipment" />
     <NavigationProperty Name="OperationSpecification" Relationship="Self.FK_OperationSpecification_TypeEquipment" FromRole="TypeEquipment" ToRole="OperationSpecification" />
@@ -270,7 +340,6 @@
     <NavigationProperty Name="Order1" Relationship="Self.FK_Order_User3" FromRole="User" ToRole="Order" />
     <NavigationProperty Name="Role" Relationship="Self.FK_User_Role" FromRole="User" ToRole="Role" />
     <NavigationProperty Name="UserImage" Relationship="Self.FK_User_UserImage" FromRole="User" ToRole="UserImage" />
-    <NavigationProperty Name="UserOperation" Relationship="Self.FK_UserOperation_User" FromRole="User" ToRole="UserOperation" />
   </EntityType>
   <EntityType Name="UserImage">
     <Key>
@@ -280,15 +349,16 @@
     <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
     <NavigationProperty Name="User" Relationship="Self.FK_User_UserImage" FromRole="UserImage" ToRole="User" />
   </EntityType>
-  <EntityType Name="UserOperation">
+  <EntityType Name="WorkshopItem">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="IdOperation" Type="Int32" />
-    <Property Name="Login" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-    <NavigationProperty Name="Operation" Relationship="Self.FK_UserOperation_Operation" FromRole="UserOperation" ToRole="Operation" />
-    <NavigationProperty Name="User" Relationship="Self.FK_UserOperation_User" FromRole="UserOperation" ToRole="User" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="IsWorkShop" Type="Boolean" />
+    <NavigationProperty Name="Location" Relationship="Self.FK_Location_WorkshopItem" FromRole="WorkshopItem" ToRole="Location" />
+    <NavigationProperty Name="Location1" Relationship="Self.FK_Location_WorkshopItem1" FromRole="WorkshopItem" ToRole="Location" />
   </EntityType>
   <Association Name="FK_Accessories_AcessoriesImage">
     <End Role="AcessoriesImage" Type="Self.AcessoriesImage" Multiplicity="0..1" />
@@ -364,15 +434,17 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Document_Order">
-    <End Role="Order" Type="Self.Order" Multiplicity="0..1" />
+  <Association Name="FK_Document_Order1">
+    <End Role="Order" Type="Self.Order" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="Document" Type="Self.Document" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Order">
-        <PropertyRef Name="Id" />
+        <PropertyRef Name="OrderNumber" />
       </Principal>
       <Dependent Role="Document">
-        <PropertyRef Name="IdOrder" />
+        <PropertyRef Name="OrderNumber" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -385,6 +457,42 @@
       </Principal>
       <Dependent Role="Equipment">
         <PropertyRef Name="IdTypeEquipment" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HardwareFailure_Equipment">
+    <End Role="Equipment" Type="Self.Equipment" Multiplicity="0..1" />
+    <End Role="HardwareFailure" Type="Self.HardwareFailure" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Equipment">
+        <PropertyRef Name="Model" />
+      </Principal>
+      <Dependent Role="HardwareFailure">
+        <PropertyRef Name="Model" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Location_WorkshopItem">
+    <End Role="WorkshopItem" Type="Self.WorkshopItem" Multiplicity="1" />
+    <End Role="Location" Type="Self.Location" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WorkshopItem">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Location">
+        <PropertyRef Name="IdWorkshop" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Location_WorkshopItem1">
+    <End Role="WorkshopItem" Type="Self.WorkshopItem" Multiplicity="1" />
+    <End Role="Location" Type="Self.Location" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WorkshopItem">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Location">
+        <PropertyRef Name="IdItem" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -488,20 +596,10 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_UserOperation_Operation">
-    <End Role="Operation" Type="Self.Operation" Multiplicity="0..1" />
-    <End Role="UserOperation" Type="Self.UserOperation" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Operation">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="UserOperation">
-        <PropertyRef Name="IdOperation" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_OperationSpecification_Product">
-    <End Role="Product" Type="Self.Product" Multiplicity="1" />
+    <End Role="Product" Type="Self.Product" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="OperationSpecification" Type="Self.OperationSpecification" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Product">
@@ -560,8 +658,50 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_StatusOrder_Order1">
+    <End Role="Order" Type="Self.Order" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="StatusOrder" Type="Self.StatusOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="OrderNumber" />
+      </Principal>
+      <Dependent Role="StatusOrder">
+        <PropertyRef Name="OrderNumber" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StatusOrder_OrderStatus">
+    <End Role="OrderStatus" Type="Self.OrderStatus" Multiplicity="0..1" />
+    <End Role="StatusOrder" Type="Self.StatusOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OrderStatus">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="StatusOrder">
+        <PropertyRef Name="IdStatus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StatusOrder_OrderStatus1">
+    <End Role="OrderStatus" Type="Self.OrderStatus" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="StatusOrder" Type="Self.StatusOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OrderStatus">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="StatusOrder">
+        <PropertyRef Name="IdOldStatus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_ProductAccessories_Product">
-    <End Role="Product" Type="Self.Product" Multiplicity="1" />
+    <End Role="Product" Type="Self.Product" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="ProductAccessories" Type="Self.ProductAccessories" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Product">
@@ -573,7 +713,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_ProductDetail_Product">
-    <End Role="Product" Type="Self.Product" Multiplicity="1" />
+    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
     <End Role="ProductDetail" Type="Self.ProductDetail" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Product">
@@ -585,7 +725,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_ProductDetail_Product1">
-    <End Role="Product" Type="Self.Product" Multiplicity="1" />
+    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
     <End Role="ProductDetail" Type="Self.ProductDetail" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Product">
@@ -597,7 +737,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_ProductMaterial_Product">
-    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="Product" Type="Self.Product" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="ProductMaterial" Type="Self.ProductMaterial" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Product">
@@ -609,13 +751,27 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Size_Product">
-    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="Product" Type="Self.Product" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="Size" Type="Self.Size" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Product">
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="Size">
+        <PropertyRef Name="IdProduct" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Test_Product">
+    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="Test" Type="Self.Test" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Test">
         <PropertyRef Name="IdProduct" />
       </Dependent>
     </ReferentialConstraint>
@@ -656,28 +812,20 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_UserOperation_User">
-    <End Role="User" Type="Self.User" Multiplicity="1" />
-    <End Role="UserOperation" Type="Self.UserOperation" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="User">
-        <PropertyRef Name="Login" />
-      </Principal>
-      <Dependent Role="UserOperation">
-        <PropertyRef Name="Login" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <EntityContainer Name="UchebkaEntities1" annotation:LazyLoadingEnabled="true">
+  <EntityContainer Name="UchebkaEntities3" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Accessories" EntityType="Self.Accessories" />
     <EntitySet Name="AcessoriesImage" EntityType="Self.AcessoriesImage" />
     <EntitySet Name="Document" EntityType="Self.Document" />
     <EntitySet Name="Equipment" EntityType="Self.Equipment" />
+    <EntitySet Name="HardwareFailure" EntityType="Self.HardwareFailure" />
+    <EntitySet Name="Item" EntityType="Self.Item" />
+    <EntitySet Name="Location" EntityType="Self.Location" />
     <EntitySet Name="Material" EntityType="Self.Material" />
     <EntitySet Name="MaterialImage" EntityType="Self.MaterialImage" />
     <EntitySet Name="Operation" EntityType="Self.Operation" />
     <EntitySet Name="OperationSpecification" EntityType="Self.OperationSpecification" />
     <EntitySet Name="Order" EntityType="Self.Order" />
+    <EntitySet Name="OrderStatus" EntityType="Self.OrderStatus" />
     <EntitySet Name="Product" EntityType="Self.Product" />
     <EntitySet Name="ProductAccessories" EntityType="Self.ProductAccessories" />
     <EntitySet Name="ProductDetail" EntityType="Self.ProductDetail" />
@@ -686,14 +834,16 @@
     <EntitySet Name="Size" EntityType="Self.Size" />
     <EntitySet Name="Sklad" EntityType="Self.Sklad" />
     <EntitySet Name="Standart" EntityType="Self.Standart" />
+    <EntitySet Name="StatusOrder" EntityType="Self.StatusOrder" />
     <EntitySet Name="Supplier" EntityType="Self.Supplier" />
+    <EntitySet Name="Test" EntityType="Self.Test" />
     <EntitySet Name="TypeAccessories" EntityType="Self.TypeAccessories" />
     <EntitySet Name="TypeEquipment" EntityType="Self.TypeEquipment" />
     <EntitySet Name="TypeMaterial" EntityType="Self.TypeMaterial" />
     <EntitySet Name="Unit" EntityType="Self.Unit" />
     <EntitySet Name="User" EntityType="Self.User" />
     <EntitySet Name="UserImage" EntityType="Self.UserImage" />
-    <EntitySet Name="UserOperation" EntityType="Self.UserOperation" />
+    <EntitySet Name="WorkshopItem" EntityType="Self.WorkshopItem" />
     <AssociationSet Name="FK_Accessories_AcessoriesImage" Association="Self.FK_Accessories_AcessoriesImage">
       <End Role="AcessoriesImage" EntitySet="AcessoriesImage" />
       <End Role="Accessories" EntitySet="Accessories" />
@@ -718,13 +868,25 @@
       <End Role="Accessories" EntitySet="Accessories" />
       <End Role="ProductAccessories" EntitySet="ProductAccessories" />
     </AssociationSet>
-    <AssociationSet Name="FK_Document_Order" Association="Self.FK_Document_Order">
+    <AssociationSet Name="FK_Document_Order1" Association="Self.FK_Document_Order1">
       <End Role="Order" EntitySet="Order" />
       <End Role="Document" EntitySet="Document" />
     </AssociationSet>
     <AssociationSet Name="FK_Equipment_TypeEquipment" Association="Self.FK_Equipment_TypeEquipment">
       <End Role="TypeEquipment" EntitySet="TypeEquipment" />
       <End Role="Equipment" EntitySet="Equipment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HardwareFailure_Equipment" Association="Self.FK_HardwareFailure_Equipment">
+      <End Role="Equipment" EntitySet="Equipment" />
+      <End Role="HardwareFailure" EntitySet="HardwareFailure" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Location_WorkshopItem" Association="Self.FK_Location_WorkshopItem">
+      <End Role="WorkshopItem" EntitySet="WorkshopItem" />
+      <End Role="Location" EntitySet="Location" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Location_WorkshopItem1" Association="Self.FK_Location_WorkshopItem1">
+      <End Role="WorkshopItem" EntitySet="WorkshopItem" />
+      <End Role="Location" EntitySet="Location" />
     </AssociationSet>
     <AssociationSet Name="FK_Material_MaterialImage" Association="Self.FK_Material_MaterialImage">
       <End Role="MaterialImage" EntitySet="MaterialImage" />
@@ -758,10 +920,6 @@
       <End Role="User" EntitySet="User" />
       <End Role="Operation" EntitySet="Operation" />
     </AssociationSet>
-    <AssociationSet Name="FK_UserOperation_Operation" Association="Self.FK_UserOperation_Operation">
-      <End Role="Operation" EntitySet="Operation" />
-      <End Role="UserOperation" EntitySet="UserOperation" />
-    </AssociationSet>
     <AssociationSet Name="FK_OperationSpecification_Product" Association="Self.FK_OperationSpecification_Product">
       <End Role="Product" EntitySet="Product" />
       <End Role="OperationSpecification" EntitySet="OperationSpecification" />
@@ -781,6 +939,18 @@
     <AssociationSet Name="FK_Order_User3" Association="Self.FK_Order_User3">
       <End Role="User" EntitySet="User" />
       <End Role="Order" EntitySet="Order" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StatusOrder_Order1" Association="Self.FK_StatusOrder_Order1">
+      <End Role="Order" EntitySet="Order" />
+      <End Role="StatusOrder" EntitySet="StatusOrder" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StatusOrder_OrderStatus" Association="Self.FK_StatusOrder_OrderStatus">
+      <End Role="OrderStatus" EntitySet="OrderStatus" />
+      <End Role="StatusOrder" EntitySet="StatusOrder" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StatusOrder_OrderStatus1" Association="Self.FK_StatusOrder_OrderStatus1">
+      <End Role="OrderStatus" EntitySet="OrderStatus" />
+      <End Role="StatusOrder" EntitySet="StatusOrder" />
     </AssociationSet>
     <AssociationSet Name="FK_ProductAccessories_Product" Association="Self.FK_ProductAccessories_Product">
       <End Role="Product" EntitySet="Product" />
@@ -802,6 +972,10 @@
       <End Role="Product" EntitySet="Product" />
       <End Role="Size" EntitySet="Size" />
     </AssociationSet>
+    <AssociationSet Name="FK_Test_Product" Association="Self.FK_Test_Product">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="Test" EntitySet="Test" />
+    </AssociationSet>
     <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
       <End Role="Role" EntitySet="Role" />
       <End Role="User" EntitySet="User" />
@@ -813,10 +987,6 @@
     <AssociationSet Name="FK_User_UserImage" Association="Self.FK_User_UserImage">
       <End Role="UserImage" EntitySet="UserImage" />
       <End Role="User" EntitySet="User" />
-    </AssociationSet>
-    <AssociationSet Name="FK_UserOperation_User" Association="Self.FK_UserOperation_User">
-      <End Role="User" EntitySet="User" />
-      <End Role="UserOperation" EntitySet="UserOperation" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

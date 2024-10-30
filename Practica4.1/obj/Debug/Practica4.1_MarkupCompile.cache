@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\User\source\repos\Practica4.1\Practica4.1\App.xaml
-8648018427
+28-535338331
 2705613953
-43-1724176883
+73-2127832338
 18-1654147507
-MainWindow.xaml;Pages\AddEditEmployeePage.xaml;Pages\AddEditMaterial.xaml;Pages\Autorization.xaml;Pages\ComponAndMater.xaml;Pages\ListEmploye.xaml;Pages\Registration.xaml;Pages\Zaglu.xaml;
+Components\AccessoriesControl.xaml;Components\DocumentControl.xaml;Components\ItemControl.xaml;Components\MaterialControl.xaml;Components\OperationControl.xaml;Components\ProductControl.xaml;Components\SizeControl.xaml;Components\TestControl.xaml;MainWindow.xaml;Pages\AddEditCompon.xaml;Pages\AddEditEmployeePage.xaml;Pages\AddEditFailure.xaml;Pages\AddEditMaterial.xaml;Pages\AddEditTestPage.xaml;Pages\AddOrders.xaml;Pages\Autorization.xaml;Pages\ComponAndMater.xaml;Pages\FailurePage.xaml;Pages\ListEmploye.xaml;Pages\OrdersClient.xaml;Pages\Registration.xaml;Pages\Sech.xaml;Pages\TestPage.xaml;Pages\Zaglu.xaml;Windows\DocumentsWindow.xaml;Windows\HistoryWindow.xaml;Windows\ProductWindow.xaml;Windows\StatusWindow.xaml;
 
-True
+False
 

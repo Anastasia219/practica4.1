@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="Хранилище UchebkaModelContainer" CdmEntityContainer="UchebkaEntities1">
+  <EntityContainerMapping StorageEntityContainer="Хранилище UchebkaModelContainer" CdmEntityContainer="UchebkaEntities3">
     <EntitySetMapping Name="Accessories">
       <EntityTypeMapping TypeName="UchebkaModel.Accessories">
         <MappingFragment StoreEntitySet="Accessories">
@@ -31,7 +31,8 @@
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Format" ColumnName="Format" />
-          <ScalarProperty Name="IdOrder" ColumnName="IdOrder" />
+          <ScalarProperty Name="OrderNumber" ColumnName="OrderNumber" />
+          <ScalarProperty Name="Bytes" ColumnName="Bytes" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -41,6 +42,37 @@
           <ScalarProperty Name="Model" ColumnName="Model" />
           <ScalarProperty Name="IdTypeEquipment" ColumnName="IdTypeEquipment" />
           <ScalarProperty Name="Characteristic" ColumnName="Characteristic" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HardwareFailure">
+      <EntityTypeMapping TypeName="UchebkaModel.HardwareFailure">
+        <MappingFragment StoreEntitySet="HardwareFailure">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="FailureStart" ColumnName="FailureStart" />
+          <ScalarProperty Name="FailureEnd" ColumnName="FailureEnd" />
+          <ScalarProperty Name="Reason" ColumnName="Reason" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Item">
+      <EntityTypeMapping TypeName="UchebkaModel.Item">
+        <MappingFragment StoreEntitySet="Item">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Photo" ColumnName="Photo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Location">
+      <EntityTypeMapping TypeName="UchebkaModel.Location">
+        <MappingFragment StoreEntitySet="Location">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IdWorkshop" ColumnName="IdWorkshop" />
+          <ScalarProperty Name="IdItem" ColumnName="IdItem" />
+          <ScalarProperty Name="FromLeft" ColumnName="FromLeft" />
+          <ScalarProperty Name="FromUp" ColumnName="FromUp" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -93,7 +125,7 @@
     <EntitySetMapping Name="Order">
       <EntityTypeMapping TypeName="UchebkaModel.Order">
         <MappingFragment StoreEntitySet="Order">
-          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="OrderNumber" ColumnName="OrderNumber" />
           <ScalarProperty Name="DateOrder" ColumnName="DateOrder" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="IdProduct" ColumnName="IdProduct" />
@@ -101,6 +133,15 @@
           <ScalarProperty Name="LoginManager" ColumnName="LoginManager" />
           <ScalarProperty Name="Amount" ColumnName="Amount" />
           <ScalarProperty Name="DateEnd" ColumnName="DateEnd" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrderStatus">
+      <EntityTypeMapping TypeName="UchebkaModel.OrderStatus">
+        <MappingFragment StoreEntitySet="OrderStatus">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -125,6 +166,7 @@
     <EntitySetMapping Name="ProductDetail">
       <EntityTypeMapping TypeName="UchebkaModel.ProductDetail">
         <MappingFragment StoreEntitySet="ProductDetail">
+          <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="IdProduct" ColumnName="IdProduct" />
           <ScalarProperty Name="IdDetail" ColumnName="IdDetail" />
           <ScalarProperty Name="Count" ColumnName="Count" />
@@ -176,12 +218,36 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="StatusOrder">
+      <EntityTypeMapping TypeName="UchebkaModel.StatusOrder">
+        <MappingFragment StoreEntitySet="StatusOrder">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IdStatus" ColumnName="IdStatus" />
+          <ScalarProperty Name="IdOldStatus" ColumnName="IdOldStatus" />
+          <ScalarProperty Name="DateChange" ColumnName="DateChange" />
+          <ScalarProperty Name="TimeChange" ColumnName="TimeChange" />
+          <ScalarProperty Name="OrderNumber" ColumnName="OrderNumber" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Supplier">
       <EntityTypeMapping TypeName="UchebkaModel.Supplier">
         <MappingFragment StoreEntitySet="Supplier">
           <ScalarProperty Name="SupplierName" ColumnName="SupplierName" />
           <ScalarProperty Name="Address" ColumnName="Address" />
           <ScalarProperty Name="DeliveryTime" ColumnName="DeliveryTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Test">
+      <EntityTypeMapping TypeName="UchebkaModel.Test">
+        <MappingFragment StoreEntitySet="Test">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="isPassed" ColumnName="isPassed" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="IdProduct" ColumnName="IdProduct" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -242,12 +308,13 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="UserOperation">
-      <EntityTypeMapping TypeName="UchebkaModel.UserOperation">
-        <MappingFragment StoreEntitySet="UserOperation">
+    <EntitySetMapping Name="WorkshopItem">
+      <EntityTypeMapping TypeName="UchebkaModel.WorkshopItem">
+        <MappingFragment StoreEntitySet="WorkshopItem">
           <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="IdOperation" ColumnName="IdOperation" />
-          <ScalarProperty Name="Login" ColumnName="Login" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Photo" ColumnName="Photo" />
+          <ScalarProperty Name="IsWorkShop" ColumnName="IsWorkShop" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

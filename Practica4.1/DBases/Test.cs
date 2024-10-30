@@ -12,13 +12,14 @@ namespace Practica4._1.DBases
     using System;
     using System.Collections.Generic;
     
-    public partial class UserOperation
+    public partial class Test
     {
         public int Id { get; set; }
-        public Nullable<int> IdOperation { get; set; }
-        public string Login { get; set; }
+        public string Name { get; set; }
+        public Nullable<bool> isPassed { get; set; }
+        public string Description { get; set; }
+        public Nullable<int> IdProduct { get; set; }
     
-        public virtual Operation Operation { get; set; }
-        public virtual User User { get; set; }
+        public virtual Product Product { get; set; }
     }
 }
