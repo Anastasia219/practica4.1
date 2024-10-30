@@ -108,6 +108,7 @@ namespace Practica4._1.Pages
             foreach (var material in accessories)
                 price += (material.Price == null ? 0 : (decimal)material.Price);
             AccessoriesPriceTb.Text = $"{price}";
+
         }
 
         private void EditMaterial_MouseDown(object sender, MouseButtonEventArgs e)
