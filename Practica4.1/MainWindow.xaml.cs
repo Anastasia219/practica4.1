@@ -70,6 +70,7 @@ namespace Practica4._1
             MainFrame.Navigate(new Autorization());
             Exit.Visibility = Visibility.Collapsed;
             Person.Visibility = Visibility.Collapsed;
+            SetIcons(false, false, false, false, false, false, false, false);
         }
         
         private void Material_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)

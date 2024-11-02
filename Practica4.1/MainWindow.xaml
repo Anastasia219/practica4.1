@@ -6,34 +6,35 @@
         xmlns:local="clr-namespace:Practica4._1"
         mc:Ignorable="d"
         Title="MainWindow" Height="650" Width="1000">
+    
     <Grid Background="#FFFFF8F8">
         <Grid.RowDefinitions>
             <RowDefinition Height="50*"/>
             <RowDefinition Height="600*"/>
         </Grid.RowDefinitions>
-
         <Frame Grid.Row="1" NavigationUIVisibility="Hidden" x:Name="MainFrame"></Frame>
         <Border Grid.Row="0" Background="#FF4767AC" CornerRadius="0 0 15 15">
             <Grid>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <Image Visibility="Collapsed" x:Name="Employee" Style="{StaticResource InteractionImage}" Source="{StaticResource employee}" Height="40" Width="45" Margin="0 5 30 0" MouseDown="Employee_MouseDown"></Image>
-                    <Image Visibility="Collapsed" x:Name="Plan" Style="{StaticResource InteractionImage}" Source="{StaticResource plan_of_a_house_svgrepo_comDrawingImage}" Height="40" Width="45" Margin="0 0 30 0" MouseDown="Plan_MouseDown" ></Image>
-                    <Image Source="/Image/Logo_Color_Transparent.png" Height="50">
-                        <!--<Image.Effect>
-                            <DropShadowEffect Opacity="0.8" BlurRadius="10" Direction="314" ShadowDepth="7" Color="Black"></DropShadowEffect>
-                        </Image.Effect>-->
-                    </Image>
-                    <Image Visibility="Collapsed" x:Name="Material" Style="{StaticResource InteractionImage}" Source="{StaticResource MaterialDrawingImage}" Height="40" Width="40" Margin="30 0 0 0" MouseDown="Material_MouseDown"></Image>
-                    <Image Visibility="Collapsed" x:Name="Order" Style="{StaticResource InteractionImage}" Source="{StaticResource order_svgrepo_comDrawingImage}" Height="50" Width="50" Margin="30 -3 0 0" MouseDown="Order_MouseDown"></Image>
-                    <Image Visibility="Collapsed" x:Name="Failure" Style="{StaticResource InteractionImage}" Source="{StaticResource warning_error_security_computer_caution_svgrepo_comDrawingImage}" Height="50" Width="50" Margin="30 -3 0 0" MouseDown="Failure_MouseDown"></Image>
+                    <Image Visibility="Collapsed" x:Name="Employee" Style="{StaticResource InteractionImage}" Source="{StaticResource employee}"
+                           Height="40" Width="45" Margin="0 5 30 0" MouseDown="Employee_MouseDown"></Image>
+                    <Image Visibility="Collapsed" x:Name="Plan" Style="{StaticResource InteractionImage}" Source="{StaticResource plan_of_a_house_svgrepo_comDrawingImage}"
+                           Height="40" Width="45" Margin="0 0 30 0" MouseDown="Plan_MouseDown" ></Image>
+                    <Image Source="/Image/Logo_Color_Transparent.png" Height="50"></Image>
+                    <Image Visibility="Collapsed" x:Name="Material" Style="{StaticResource InteractionImage}" Source="{StaticResource MaterialDrawingImage}" 
+                           Height="40" Width="40" Margin="30 0 0 0" MouseDown="Material_MouseDown"></Image>
+                    <Image Visibility="Collapsed" x:Name="Order" Style="{StaticResource InteractionImage}" Source="{StaticResource order_svgrepo_comDrawingImage}"
+                           Height="50" Width="50" Margin="30 -3 0 0" MouseDown="Order_MouseDown"></Image>
+                    <Image Visibility="Collapsed" x:Name="Failure" Style="{StaticResource InteractionImage}" Source="{StaticResource warning_error_security_computer_caution_svgrepo_comDrawingImage}" 
+                           Height="50" Width="50" Margin="30 -3 0 0" MouseDown="Failure_MouseDown"></Image>
                     <Image Visibility="Collapsed" x:Name="Test" Style="{StaticResource InteractionImage}" Source="{StaticResource TestDrawingImage}" Height="40" Width="40" Margin="30 0 0 0" MouseDown="Test_MouseDown"></Image>
                 </StackPanel>
 
-                <Image Visibility="Collapsed" MouseDown="Person_MouseDown" x:Name="Person" Style="{StaticResource InteractionImage}" Source="{StaticResource PersonDrawingImage}" HorizontalAlignment="Left" VerticalAlignment="Center" Width="40" Height="40" Margin="10 0 0 0"></Image>
-                <Image Visibility="Collapsed" x:Name="Exit" Style="{StaticResource InteractionImage}" Source="{StaticResource exit_svgrepo_comDrawingImage}"  HorizontalAlignment="Right" VerticalAlignment="Center" Width="25" Height="25" Margin="0 0 10 0" MouseDown="Exit_MouseDown" ></Image>
+                <Image Visibility="Collapsed" MouseDown="Person_MouseDown" x:Name="Person" Style="{StaticResource InteractionImage}" Source="{StaticResource PersonDrawingImage}" 
+                       HorizontalAlignment="Left" VerticalAlignment="Center" Width="40" Height="40" Margin="10 0 0 0"></Image>
+                <Image Visibility="Collapsed" x:Name="Exit" Style="{StaticResource InteractionImage}" Source="{StaticResource exit_svgrepo_comDrawingImage}"  HorizontalAlignment="Right" 
+                       VerticalAlignment="Center" Width="25" Height="25" Margin="0 0 10 0" MouseDown="Exit_MouseDown" ></Image>
             </Grid>
         </Border>
-       
-
     </Grid>
 </Window>

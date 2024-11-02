@@ -48,10 +48,10 @@
         </StackPanel>
 
         <Image x:Name="Back" Style="{StaticResource InteractionImage}" Source="{StaticResource arrow_ios_back_svgrepo_comDrawingImage}" Width="40" Height="40" Margin="10" HorizontalAlignment="Left" VerticalAlignment="Top" MouseDown="Back_MouseDown"></Image>
-        <Image x:Name="Menu" Style="{StaticResource InteractionImage}" Source="{StaticResource menu_svgrepo_comDrawingImage}" Width="30" Height="30" Margin="15 35" HorizontalAlignment="Right" VerticalAlignment="Top" MouseDown="Menu_MouseDown"></Image>
+       
 
-        <Rectangle Grid.RowSpan="2" Fill="#7F000000" x:Name="MyRectangle" Visibility="Collapsed" MouseDown="MyRectangle_MouseDown"  ></Rectangle>
-        <StackPanel x:Name="MyPanel"  RenderTransformOrigin="0.5,0.5" Visibility="Collapsed" Background="White" HorizontalAlignment="Right" Width="300" Grid.RowSpan="2" >
+            <Rectangle Grid.RowSpan="2" Fill="#7F000000" x:Name="MyRectangle" Visibility="Collapsed" MouseDown="MyRectangle_MouseDown"  ></Rectangle>
+        <StackPanel x:Name="MyPanel"  RenderTransformOrigin="0.5,0.5" Visibility="Visible" Background="White" HorizontalAlignment="Right" Width="300" Grid.RowSpan="2" >
             <StackPanel.RenderTransform>
                 <TranslateTransform x:Name="myTranslateTransform"></TranslateTransform>
             </StackPanel.RenderTransform>
